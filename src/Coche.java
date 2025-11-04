@@ -2,7 +2,6 @@ public class Coche extends Vehiculo {
 
     // Atributo propio del coche, solo los coches tienen este atributo.
     private int numPuertas;
-
     // CONSTRUCTOR (Llamada al Padre, inicializamos el objeto)
     // Un Coche necesita todos los datos de un Véhiculo más su propio dato (numPuertas).
     public Coche(String modelo, int anio, String color, int numPuertas) {
