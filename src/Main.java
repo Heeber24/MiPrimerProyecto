@@ -29,10 +29,10 @@ public class Main {
         // CREACIÓN DE OBJETOS: Instancia de las clases hijas
 
         // Coche usa el constructor de Coche
-        Coche miCoche = new Coche("Tesla Model 3", 2024, "Rojo", 4);
+        Coche miCoche = new Coche("Tesla Model 3", 2024, "Rojo", 4, 2.0);
 
         // Motocicleta usa el constructor de Motocicleta
-        Motocicleta miMoto = new Motocicleta("Yamaha YZF-R6", 2023, "Azul", 600);
+        Motocicleta miMoto = new Motocicleta("Yamaha YZF-R6", 2023, "Azul", 100);
 
         System.out.println("\nPrueba de Clases Individuales \n");
 
@@ -41,8 +41,12 @@ public class Main {
         System.out.println("Modelo de la moto: " + miMoto.getModelo() + " " + miMoto.getAnio() + " " + miMoto.getColor()); // Uso del Getter (Encapsulamiento)
         miCoche.setColor("Negro Mate"); // Uso del Setter
         miMoto.setColor("Verde"); // Uso del Setter
-        miCoche.prendeClima(); //M3todo único dal Coche
+        miCoche.abrirPuerta();
         miMoto.hacerCaballito(); // Método único de Motocicleta
+        miCoche.cerrarPuerta();
+        miCoche.isEncendido();
+        miCoche.prendeClima();
+        miCoche.getNumPuertas();
 
 
         System.out.println("------------------------------------");
@@ -60,17 +64,25 @@ public class Main {
 
             // Java llama automáticamente al método 'encender()' definido en Véhiculo (Herencia)
             vehiculo.encender();
+            System.out.println("Velocidad inicial: " + vehiculo.getVelocidadActual() + " km/h");
 
 
             // Java llama automáticamente al método 'acelerar()' específico de cada objeto:
             // Si es Coche o Moto, usa la lógica de aceleración de Coche.
-            vehiculo.acelerar(20);
+            vehiculo.acelerar(15);
+
+
 
             System.out.println("------------------------------------");
         }
 
+        for (Vehiculo vehiculo : listaVehiculos) {
+            vehiculo.apagar();
+            System.out.println("------------------------------------");
+        }
+
         // PRUEBA ADICIONAL: Ejecución de la lógica de negocio
-        miMoto.acelerar(50); // Muestra la aceleración de la moto (con el factor de cilindrada)
+        miMoto.acelerar(30); // Muestra la aceleración de la moto (con el factor de cilindrada)
         miCoche.acelerar(50); // Muestra la aceleración del coche (con su propia lógica)
 
     }
