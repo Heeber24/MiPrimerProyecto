@@ -13,20 +13,21 @@ public abstract class Vehiculo {
     protected boolean encendido = false;
 
 
-    // Constructor (inicialización de estados)
+    // Constructor (inicialización de estados) recibe parámetros para inicializar los atributos.
     // Se usa para garantizar que los atributos se inicialicen al crear el objeto.
-    public Vehiculo (String modelo, int anio, String color){
+
+    public Vehiculo(String modelo, int anio, String color) {
         this.modelo = modelo;
         this.anio = anio;
         this.color = color;
     }
 
     // Métodos
-    public void encender(){
+    public void encender() {
         System.out.println(this.modelo + ", Año " + this.anio + ", Color " + this.color + " encendido.");
     }
 
-    public void apagar(){
+    public void apagar() {
         this.velocidadActual = 0;
         System.out.println(this.modelo + ", Año " + this.anio + ", Color " + this.color + " se ha apagado.");
     }
@@ -36,6 +37,7 @@ public abstract class Vehiculo {
     //public abstract void acelerar(int incremento);
 
     // El método ahora recibe el tiempo de aceleración en segundos
+    // Se pone abstracto para que las subclases lo implementen.
     public abstract void acelerar(int segundos);
     // GETTERS Y SETTERS (acceso Controlado)
 
@@ -55,9 +57,10 @@ public abstract class Vehiculo {
     public int getVelocidadActual() {
         return velocidadActual;
     }
+
     // Getter público para saber el estado (convención 'is' para booleanos)
     public boolean isEncendido() {
-        return this.encendido=true;
+        return this.encendido = true;
     }
 
     // Setter: Permite MODIFICAR un atributo privado (con lógica de validación).

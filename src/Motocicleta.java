@@ -41,8 +41,17 @@ public class Motocicleta extends Vehiculo {
         // Por cada 100cc por encima de la base, reducimos el tiempo.
         // Usamos Math.log para una reducción que se desacelera (más realista).
         // Math.log es el logaritmo natural que da una reducción progresiva.
-        double factorReduccion = Math.log(cilindrada / 100.0) * 3.0;
+        double factorReduccion = Math.log(cilindrada / 100.0) * 5.0;
+        // Al ponerle 5.0 se dice que reduce 5 segundos por cada incremento logarítmico.
+        // Esto significa que a medida que la cilindrada aumenta, el beneficio en tiempo disminuye.
         double tiempoCalculado = tiempoBase - factorReduccion;
+        // El resultado de una cilindrada de 100cc seria 15 - log(1)*5 = 15 - 0 = 15 segundos
+        // El resultado de una cilindrada de 200cc seria 15 - log(2)*5 = 15 - 3.465 = 11.535 segundos
+        // El resultado de una cilindrada de 500cc seria 15 - log(5)*5 = 15 - 8.047 = 6.953 segundos
+        // El resultado de una cilindrada de 1000cc seria 15 - log(10)*5 = 15 - 11.512 = 3.488 segundos
+
+
+
 
         // Garantizamos que el tiempo no sea negativo o demasiado bajo
         // Mínimo 2.5 segundos para motos muy potentes.
@@ -72,12 +81,12 @@ public class Motocicleta extends Vehiculo {
         if (velocidadPotencial > this.velocidadMaxima) {
             // Si la velocidad se pasa del límite, la forzamos al límite MÁXIMO
             this.velocidadActual = this.velocidadMaxima - this.velocidadActual;
-            System.out.println("La Moto " + getModelo() + ", año " + getAnio() + ", color " + getColor() + " " + this.cilindradaCC + ", cc " + " acelero y ahora va a " + this.velocidadActual + " km/h.");
+            System.out.println("La Moto " + getModelo() + ", año " + getAnio() + ", color " + getColor() + " " + this.cilindradaCC + " cc " + " acelero y ahora va a " + this.velocidadActual + " km/h.");
 
         } else {
             // Aplicamos la ganancia normal
             this.velocidadActual = velocidadPotencial;
-            System.out.println("La Moto " + getModelo() + ", año " + getAnio() + ", color " + getColor() + " " + this.cilindradaCC + ", cc " + " acelero y ahora va a " + this.velocidadActual + " km/h.");
+            System.out.println("La Moto " + getModelo() + ", año " + getAnio() + ", color " + getColor() + " " + this.cilindradaCC + " cc " + " acelero y ahora va a " + this.velocidadActual + " km/h.");
         }
 
 

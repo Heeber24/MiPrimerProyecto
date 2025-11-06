@@ -5,7 +5,7 @@ public class Coche extends Vehiculo {
     private final int velocidadMaxima;
     private final int numPuertas;
 
-    private boolean puertasAbiertas;
+    private boolean puertasAbiertas = false;
     // CONSTRUCTOR (Llamada al Padre, inicializamos el objeto)
     // Un Coche necesita todos los datos de un Véhiculo más su propio dato (numPuertas).
     public Coche(String modelo, int anio, String color, int numPuertas, double motorLitros) {
@@ -20,7 +20,7 @@ public class Coche extends Vehiculo {
         // Inicializamos la velocidad máxima del coche
         this.velocidadMaxima = calcularVelocidadMaxima(motorLitros);
         // Inicializamos el estado de las puertas
-        this.puertasAbiertas = false;
+        //this.puertasAbiertas = false;
     }
 
     // Lógica para calcular la velocidad máxima de un coche basado en el tamaño del motor.
@@ -70,12 +70,12 @@ public class Coche extends Vehiculo {
             // Si la velocidad se pasa del límite, la forzamos al límite MÁXIMO
             this.velocidadActual = this.velocidadMaxima - this.velocidadActual;
 
-            System.out.println("La Moto " + getModelo() + ", año " + getAnio() + ", color " + getColor() + " " + this.motorLitros + ", cc " + " acelero y ahora va a " + this.velocidadActual + " km/h.");
+            System.out.println("El coche " + getModelo() + ", año " + getAnio() + ", color " + getColor() + " " + this.motorLitros + " acelero y ahora va a " + this.velocidadActual + " km/h.");
 
         } else {
             // Aplicamos la ganancia normal
             this.velocidadActual = velocidadPotencial;
-            System.out.println("La Moto " + getModelo() + ", año " + getAnio() + ", color " + getColor() + " " + this.motorLitros + ", cc " + " acelero y ahora va a " + this.velocidadActual + " km/h.");
+            System.out.println("El coche " + getModelo() + ", año " + getAnio() + ", color " + getColor() + " " + this.motorLitros + " acelero y ahora va a " + this.velocidadActual + " km/h.");
         }
 
 
@@ -124,7 +124,8 @@ public class Coche extends Vehiculo {
         }
     }
 
-    // Getter simple
+
     public void getNumPuertas() {
+
     }
 }
