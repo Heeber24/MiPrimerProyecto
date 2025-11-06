@@ -105,5 +105,4 @@ public class Motocicleta extends Vehiculo {
         System.out.println("La moto " + getModelo() + " esta haciendo un caballito");
     }
 
-
 }

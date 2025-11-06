@@ -124,7 +124,6 @@ public class Coche extends Vehiculo {
         }
     }
 
-
     public void getNumPuertas() {
 
     }
