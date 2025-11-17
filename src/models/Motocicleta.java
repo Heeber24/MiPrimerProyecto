@@ -1,4 +1,8 @@
-public class Motocicleta extends Vehiculo {
+package models;
+
+import services.Servicio;
+
+public class Motocicleta extends Vehiculo implements Servicio {
 
     // Atributo propio de la moto, solo las motos tienen este atributo.
     private final int cilindradaCC;
@@ -98,11 +102,24 @@ public class Motocicleta extends Vehiculo {
     }
 
 
-    // Métodos propios de la Motocicleta
+    // Métodos propios de la Models. Motocicleta
 
     // Getter para el atributo propio del Moto
     public void hacerCaballito() {
         System.out.println("La moto " + getModelo() + " esta haciendo un caballito");
+    }
+
+    @Override
+    public void realizarMantenimiento() {
+        System.out.println("Servicio de moto: Cambiando aceite, filtros y revisando frenos ABS.");
+        // Simulamos que ya quedó al 100
+    }
+
+    @Override
+    public boolean hacerRevision() {
+        // Lógica simple: Si tiene más de 5 años o muchos kilómetros (simulado), necesita revisión.
+        // Aquí usaremos el año para el ejemplo.
+        return this.getAnio() < 2024;
     }
 
 }

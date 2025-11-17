@@ -1,3 +1,5 @@
+package models;
+
 public abstract class Vehiculo {
     //abstract se utiliza para decir que no se puede crear objetos directamente de esta clase, solo sirve para heredar
 
@@ -8,9 +10,12 @@ public abstract class Vehiculo {
     private final String modelo;
     private final int anio;
     private String color;
-    // Protected: Accesible por esta clase y por CUALQUIER CLASE HIJA (Coche, Motocicleta).
+    // Protected: Accesible por esta clase y por CUALQUIER CLASE HIJA (Models. Coche, Models.Motocicleta).
     protected int velocidadActual = 0;
     protected boolean encendido = false;
+    private final double precioMagna = 24;
+    private final double precioPremium = 26;
+
 
 
     // Constructor (inicialización de estados) recibe parámetros para inicializar los atributos.
@@ -29,18 +34,55 @@ public abstract class Vehiculo {
 
     public void apagar() {
         this.velocidadActual = 0;
+        this.encendido = false;
         System.out.println(this.modelo + ", Año " + this.anio + ", Color " + this.color + " se ha apagado.");
     }
 
-    // Polimorfismo: Obligatorio para las clases hijas.
-    // Cada subclase (Coche, Motocicleta) definirá su propia lógica de aceleración.
-    //public abstract void acelerar(int incremento);
 
+    // Polimorfismo: Obligatorio para las clases hijas.
+    // Cada subclase (Models. Coche, Models. Motocicleta) definirá su propia lógica de aceleración.
     // El método ahora recibe el tiempo de aceleración en segundos
     // Se pone abstracto para que las subclases lo implementen.
     public abstract void acelerar(int segundos);
-    // GETTERS Y SETTERS (acceso Controlado)
 
+
+    // Sobrecarga:
+    public void echarGasolina(double litros, boolean esPremium) {
+
+        // Restricción
+        if (this.encendido) {
+            System.out.println("¡PELIGRO! " + this.modelo + " está encendido. Apágalo antes de echar gasolina.");
+            return; // Aquí se mata la función si no cumple la regla. No sigue leyendo abajo.
+        }
+
+        // Si es Premium es true, usa precioPremium, si no, precioMagna
+        double precio = esPremium ? precioPremium : precioMagna;
+        String tipo = esPremium ? "PREMIUM" : "MAGNA";
+
+        // Calculamos el costo total por litros cargados
+        double totalPagar = litros * precio;
+        System.out.println(this.modelo + " está cargando " + litros + " litros." + " Tipo " + tipo + ". Precio $" + precio + ". Total a pagar. $" + totalPagar);
+    }
+
+    public void echarGasolina(int pesos, boolean esPremium) {
+
+        if (this.encendido) {
+            System.out.println("¡PELIGRO! " + this.modelo + " está encendido. Apágalo antes de echar gasolina.");
+            return; // Aquí se mata la función si no cumple la regla. No sigue leyendo abajo.
+        }
+
+        double precio = esPremium ? precioPremium : precioMagna;
+        String tipo = esPremium ? "PREMIUM" : "MAGNA";
+
+        // Calculamos cuántos litros tocan por el dinero cargado
+        double litros = pesos / precio;
+
+        System.out.println(this.modelo + " pidió " + pesos + " pesos." + " Tipo " + tipo + ". Precio $" + precio + ". Total de litros " + String.format("%.2f", litros) + " L.");
+    }
+
+
+
+    // GETTERS Y SETTERS (acceso Controlado)
     // Getters: Permiten LEER los atributos privados.
     public String getModelo() {
         return modelo;

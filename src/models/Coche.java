@@ -1,4 +1,8 @@
-public class Coche extends Vehiculo {
+package models;
+
+import services.Servicio;
+
+public class Coche extends Vehiculo implements Servicio {
 
     // Atributo propio del coche, solo los coches tienen este atributo.
     private final double motorLitros; // Ejemplo: 2.0 litros
@@ -7,14 +11,14 @@ public class Coche extends Vehiculo {
 
     private boolean puertasAbiertas = false;
     // CONSTRUCTOR (Llamada al Padre, inicializamos el objeto)
-    // Un Coche necesita todos los datos de un Véhiculo más su propio dato (numPuertas).
+    // Un Models. Coche necesita todos los datos de un Véhiculo más su propio dato (numPuertas).
     public Coche(String modelo, int anio, String color, int numPuertas, double motorLitros) {
 
         // El constructor de la clase hija DEBE llamar primero al constructor del Padre.
         // La palabra clave 'super()' invoca el constructor de Véhiculo.
         super(modelo, anio, color);
 
-        // Inicialización de atributos propios del Coche
+        // Inicialización de atributos propios del Models. Coche
         this.numPuertas = numPuertas;
         this.motorLitros = motorLitros;
         // Inicializamos la velocidad máxima del coche
@@ -126,5 +130,18 @@ public class Coche extends Vehiculo {
 
     public void getNumPuertas() {
 
+    }
+
+    @Override
+    public void realizarMantenimiento() {
+        System.out.println("Servicio de coche: Cambiando aceite, filtros y revisando frenos ABS.");
+        // Simulamos que ya quedó al 100
+    }
+
+    @Override
+    public boolean hacerRevision() {
+        // Lógica simple: Si tiene más de 5 años o muchos kilómetros (simulado), necesita revisión.
+        // Aquí usaremos el año para el ejemplo.
+        return this.getAnio() < 2022;
     }
 }

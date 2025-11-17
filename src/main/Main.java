@@ -1,4 +1,4 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+package main;//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
@@ -7,16 +7,21 @@
 //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
 // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
 
+import models.Vehiculo;
+import models.Coche;
+import models.Motocicleta;
+import services.Servicio;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-// public class Main es la definición de la clase principal del programa.
+// Public class Main. Main es la definición de la clase principal del programa.
 public class Main {
 
     //public es el modificador de acceso que permite ejecutar el método desde cualquier lugar.
-    //static indica que el método pertenece a la clase Main y no a una instancia específica.
+    //static indica que el método pertenece a la clase Main.Main y no a una instancia específica.
     //void significa que el método no devuelve ningún valor.
     // main es el nombre del método principal que se ejecuta al iniciar el programa.
     // String[] args es un parámetro que permite recibir argumentos desde la línea de comandos al ejecutar el programa.
@@ -24,13 +29,13 @@ public class Main {
 
         // CREACIÓN DE OBJETOS: Instancia de las clases hijas
 
-        // Coche usa el constructor de Coche
+        // Models. Coche usa el constructor de Models.Coche
         Coche miCoche = new Coche("Tesla Model 3", 2024, "Rojo", 4, 2.0);
         Coche otroCoche = new Coche("Ford Fiesta", 2018, "Blanco", 4, 1.5);
 
 
 
-        // Motocicleta usa el constructor de Motocicleta
+        // Models. Motocicleta usa el constructor de Models. Motocicleta
         Motocicleta miMoto = new Motocicleta("Yamaha YZF-R6", 2023, "Azul", 100);
         Motocicleta otraMoto = new Motocicleta("Honda CBR500R", 2020, "Negra", 500);
 
@@ -44,11 +49,16 @@ public class Main {
         miCoche.setColor("Negro Mate"); // Uso del Setter
         miMoto.setColor("Verde"); // Uso del Setter
         miCoche.abrirPuerta();
-        miMoto.hacerCaballito(); // Método único de Motocicleta
+        miMoto.isEncendido();
+        miMoto.hacerCaballito(); // Método único de Models.Motocicleta
         miCoche.cerrarPuerta();
         miCoche.isEncendido();
         miCoche.prendeClima();
         miCoche.getNumPuertas();
+        miCoche.apagar();
+        miMoto.apagar();
+        miCoche.echarGasolina(20.00, false);
+        miMoto.echarGasolina(500, true);
 
 
 
@@ -57,9 +67,9 @@ public class Main {
         // POLIMORFISMO: Crear una lista de tipo Padre (Véhiculo)
         // La lista puede contener cualquier clase que herede de Véhiculo.
         List<Vehiculo> listaVehiculos = new ArrayList<>();
-        listaVehiculos.add(miCoche); // Un Coche es un Vehiculo
+        listaVehiculos.add(miCoche); // Un Models.Coche es un Models.Vehiculo
         listaVehiculos.add(otroCoche);
-        listaVehiculos.add(miMoto);  // Una Motocicleta es un Vehiculo
+        listaVehiculos.add(miMoto);  // Una Models. Motocicleta es un Models.Vehiculo
         listaVehiculos.add(otraMoto);
 
         System.out.println("Demostración de Polimorfismo \n");
@@ -73,7 +83,7 @@ public class Main {
 
 
             // Java llama automáticamente al método 'acelerar()' específico de cada objeto:
-            // Si es Coche o Moto, usa la lógica de aceleración de Coche.
+            // Si es Models.Coche o Moto, usa la lógica de aceleración de Models.Coche.
             vehiculo.acelerar(10);
 
 
@@ -104,5 +114,30 @@ public class Main {
         otraMoto.acelerar(8); // Muestra la aceleración del coche (con su propia lógica)
         // Aquí el resultado seria 115 km/h si no supera el límite.
 
+
+        //
+        System.out.println("------------------------------------");
+        System.out.println("PRUEBA DE INTERFACES (TALLER MECÁNICO)");
+
+        // Creamos una lista NO de Vehículos, sino de "Servicios"
+        // Esto demuestra Polimorfismo puro a través de interfaces
+        List<Servicio> colaDelTaller = new ArrayList<>();
+
+        colaDelTaller.add(miCoche);    // El coche es un Servicio
+        colaDelTaller.add(miMoto);     // La moto es un Servicio
+
+        for (Servicio cliente : colaDelTaller) {
+            // Preguntamos si necesita revisión (Método de la interfaz)
+            if (cliente.hacerRevision()) {
+                System.out.println("El cliente necesita atención...");
+                cliente.realizarMantenimiento(); // Ejecuta la lógica específica (Coche o Moto)
+            } else {
+                System.out.println("Este cliente está al día, no necesita nada.");
+            }
+        }
+
     }
+
+
+
 }
